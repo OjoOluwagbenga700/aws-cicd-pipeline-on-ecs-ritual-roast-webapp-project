@@ -17,7 +17,7 @@ resource "aws_codebuild_project" "rr_build" {
     privileged_mode = true
 
     environment_variable {
-      name  = "AWS_REGION"
+      name  = "AWS_DEFAULT_REGION"
       value = var.aws_region
     }
 
