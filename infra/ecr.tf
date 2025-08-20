@@ -32,8 +32,8 @@ resource "docker_image" "image" {
   # Image name using ECR repository URL with latest tag
   name = "${aws_ecr_repository.ecr_repo.repository_url}:latest"
   build {
-   context    = "${path.module}./"
-   dockerfile = "Dockerfile"
+    context    = "${path.module}./"
+    dockerfile = "Dockerfile"
 
   }
 }

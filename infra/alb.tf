@@ -1,7 +1,7 @@
 # Create an Application Load Balancer (ALB) for the e-commerce application
 # This ALB is internet-facing (external) and deployed across 2 public subnets
 resource "aws_lb" "alb" {
-  name                       = "e-commerce-alb"
+  name                       = "ritual-roast-alb"
   internal                   = false
   load_balancer_type         = "application"
   security_groups            = [aws_security_group.alb_sg.id]
@@ -10,7 +10,7 @@ resource "aws_lb" "alb" {
   depends_on                 = [module.networking, aws_security_group.alb_sg]
 
   tags = {
-    Name = "e-commerce-alb"
+    Name = "ritual-roast-alb"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_lb" "alb" {
 # Uses IP target type since ECS tasks have their own IPs
 # Health check configured to verify application health every 5 minutes
 resource "aws_lb_target_group" "alb_tg" {
-  name        = "e-commerce-tg"
+  name        = "ritual-roast-tg"
   target_type = "ip"
   port        = 80
   protocol    = "HTTP"

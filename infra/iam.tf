@@ -38,7 +38,7 @@ resource "aws_iam_role_policy_attachment" "ecs_exec_policy" {
 
 # IAM role for CodeBuild
 resource "aws_iam_role" "codebuild_role" {
-  name = "e-commerce-codebuild-role"
+  name = "ritual-roast-codebuild-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -56,7 +56,7 @@ resource "aws_iam_role" "codebuild_role" {
 
 # IAM policy for CodeBuild
 resource "aws_iam_policy" "codebuild_policy" {
-  name        = "e-commerce-codebuild-policy"
+  name        = "ritual-roast-codebuild-policy"
   description = "Policy for CodeBuild to access required resources"
 
   policy = jsonencode({
@@ -120,7 +120,7 @@ resource "aws_iam_role_policy_attachment" "codebuild_policy_attachment" {
 
 # IAM role for CodePipeline
 resource "aws_iam_role" "codepipeline_role" {
-  name = "e-commerce-codepipeline-role"
+  name = "ritual-roast-codepipeline-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -138,7 +138,7 @@ resource "aws_iam_role" "codepipeline_role" {
 
 # IAM policy for CodePipeline
 resource "aws_iam_policy" "codepipeline_policy" {
-  name        = "e-commerce-codepipeline-policy"
+  name        = "ritual-roast-codepipeline-policy"
   description = "Policy for CodePipeline to access required resources"
 
   policy = jsonencode({
@@ -160,16 +160,18 @@ resource "aws_iam_policy" "codepipeline_policy" {
       {
         Action   = ["codebuild:BatchGetBuilds", "codebuild:StartBuild"]
         Effect   = "Allow"
-        Resource = aws_codebuild_project.e_commerce_build.arn
+        Resource = aws_codebuild_project.rr_build.arn
       },
 
       {
         Action = [
           "ecs:DescribeServices",
-          "ecs:UpdateService"
+          "ecs:UpdateService",
+          "ecs:ListServices",
+          "ecs:DescribeClusters"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:service/${var.service_name}"
+        Resource = "*"
       },
       {
         Action = [
@@ -210,4 +212,9 @@ resource "aws_iam_policy" "codepipeline_policy" {
 resource "aws_iam_role_policy_attachment" "codepipeline_policy_attachment" {
   role       = aws_iam_role.codepipeline_role.name
   policy_arn = aws_iam_policy.codepipeline_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_policy_attachment" {
+  role       = aws_iam_role.codepipeline_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }

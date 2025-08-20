@@ -1,8 +1,8 @@
 
 # CodeBuild project
-resource "aws_codebuild_project" "e_commerce_build" {
-  name          = "e-commerce-build"
-  description   = "Build project for e-commerce website"
+resource "aws_codebuild_project" "rr_build" {
+  name          = "ritual-roast-build"
+  description   = "Build project for ritual roast website"
   service_role  = aws_iam_role.codebuild_role.arn
   build_timeout = 60
 
@@ -30,12 +30,6 @@ resource "aws_codebuild_project" "e_commerce_build" {
       name  = "ECR_REPOSITORY_NAME"
       value = var.repository_name
     }
-
-    environment_variable {
-      name  = "ECS_TASK_DEFINITION"
-      value = var.family
-    }
-
     environment_variable {
       name  = "CONTAINER_NAME"
       value = var.container_name
@@ -68,11 +62,6 @@ resource "aws_codebuild_project" "e_commerce_build" {
     environment_variable {
       name  = "LOG_GROUP_NAME"
       value = var.log_group_name
-    }
-
-    environment_variable {
-      name  = "AWS_REGION"
-      value = var.aws_region
     }
   }
 

@@ -25,8 +25,8 @@ module "networking" {
 
 # Security group for ECS tasks
 resource "aws_security_group" "ecs_task_sg" {
-  name        = "e-commerce-ecs-task-sg"
-  description = "Security group .for ECS tasks through ALB"
+  name        = "ritual-roast-ecs-task-sg"
+  description = "Security group for ECS tasks through ALB"
   vpc_id      = module.networking.vpc_id
 
   # Allow inbound HTTP traffic from ALB
@@ -58,7 +58,7 @@ resource "aws_security_group" "ecs_task_sg" {
 
 # Security group for Application Load Balancer
 resource "aws_security_group" "alb_sg" {
-  name        = "e-commerce-alb-sg"
+  name        = "ritual-roast-alb-sg"
   description = "enable http/https access on port 80 and 443 respectively"
   vpc_id      = module.networking.vpc_id
 
@@ -90,7 +90,7 @@ resource "aws_security_group" "alb_sg" {
   }
 
   tags = {
-    Name = "e-commerce-alb-sg"
+    Name = "ritual-roast-alb-sg"
   }
 
 }

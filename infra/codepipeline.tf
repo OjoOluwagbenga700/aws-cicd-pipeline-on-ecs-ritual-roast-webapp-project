@@ -6,7 +6,7 @@ resource "aws_codestarconnections_connection" "github_connection" {
 }
 
 # CodePipeline
-resource "aws_codepipeline" "e_commerce_pipeline" {
+resource "aws_codepipeline" "ritual_roast_pipeline" {
   name     = "ritual-roast-pipeline"
   role_arn = aws_iam_role.codepipeline_role.arn
 
@@ -48,7 +48,7 @@ resource "aws_codepipeline" "e_commerce_pipeline" {
       output_artifacts = ["build_output"]
 
       configuration = {
-        ProjectName = aws_codebuild_project.e_commerce_build.name
+        ProjectName = aws_codebuild_project.rr_build.name
       }
     }
   }
@@ -71,5 +71,5 @@ resource "aws_codepipeline" "e_commerce_pipeline" {
       }
     }
   }
-  depends_on = [aws_codebuild_project.e_commerce_build, aws_codestarconnections_connection.github_connection]
+  depends_on = [aws_codebuild_project.rr_build, aws_codestarconnections_connection.github_connection]
 }
