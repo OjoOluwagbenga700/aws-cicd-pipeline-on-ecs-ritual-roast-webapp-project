@@ -7,7 +7,7 @@ resource "aws_codestarconnections_connection" "github_connection" {
 
 # CodePipeline
 resource "aws_codepipeline" "e_commerce_pipeline" {
-  name     = "e-commerce-pipeline"
+  name     = "ritual-roast-pipeline"
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {

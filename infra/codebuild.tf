@@ -17,7 +17,7 @@ resource "aws_codebuild_project" "e_commerce_build" {
     privileged_mode = true
 
     environment_variable {
-      name  = "AWS_DEFAULT_REGION"
+      name  = "AWS_REGION"
       value = var.aws_region
     }
 
