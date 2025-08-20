@@ -15,7 +15,7 @@ public_subnets           = ["10.0.1.0/24", "10.0.2.0/24"]
 public_subnet_names      = ["public-subnet-1", "public-subnet-2"]
 private_subnet_names     = ["App-subnet-1", "App-subnet-2", "DB-subnet-1", "DB-subnet-2"]
 private_subnets          = ["10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
-github_repo              = "OjoOluwagbenga700/aws-cicd-pipepiline-on-ecs-ritual-roast-webapp-project-"
+github_repo              = "OjoOluwagbenga700/aws-cicd-pipeline-on-ecs-ritual-roast-webapp-project"
 github_branch            = "main"
 codepipeline_bucket_name = "ritual-roast-cicd-artifacts"
 
