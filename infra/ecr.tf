@@ -5,7 +5,7 @@ data "aws_caller_identity" "current" {}
 
 data "aws_ecr_authorization_token" "token" {}
 
-# Docker provider configuration for ECR authentication
+
 provider "docker" {
   registry_auth {
 
