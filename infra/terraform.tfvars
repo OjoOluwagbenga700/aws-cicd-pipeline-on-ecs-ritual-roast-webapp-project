@@ -1,0 +1,21 @@
+project_name             = "ritual-roast"
+ecs_cluster_name         = "ritual-roast-cluster"
+service_name             = "ritual-roast-service"
+family                   = "ritual-roast"
+task_cpu                 = 1024
+task_memory              = 2048
+container_name           = "ritual-roast"
+repository_name          = "ritual-roast"
+aws_region               = "us-east-1"
+log_group_name           = "/ecs/ritual-roast"
+vpc_cidr                 = "10.0.0.0/16"
+vpc_name                 = "ritual-roast"
+azs                      = ["us-east-1a", "us-east-1b"]
+public_subnets           = ["10.0.1.0/24", "10.0.2.0/24"]
+public_subnet_names      = ["public-subnet-1", "public-subnet-2"]
+private_subnet_names     = ["App-subnet-1", "App-subnet-2", "DB-subnet-1", "DB-subnet-2"]
+private_subnets          = ["10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+github_repo              = "OjoOluwagbenga700/aws-cicd-pipepiline-on-ecs-ritual-roast-webapp-project-"
+github_branch            = "main"
+codepipeline_bucket_name = "ritual-roast-cicd-artifacts"
+
