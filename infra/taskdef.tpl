@@ -12,6 +12,24 @@
       }
     ],
     "essential": true,
+    "environment": [
+      {
+        "name": "DB_HOST",
+        "value": "${db_host}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "${db_name}"
+      },
+      {
+        "name": "DB_USERNAME",
+        "value": "${db_username}"
+      },
+      {
+        "name": "DB_PASSWORD",
+        "value": "${db_password}"
+      }
+    ],
     "linuxParameters": {
       "initProcessEnabled": true
     },
