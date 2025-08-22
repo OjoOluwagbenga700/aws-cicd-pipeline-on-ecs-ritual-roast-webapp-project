@@ -1,5 +1,5 @@
 # official php image with apache
-FROM php:7.4-apache
+FROM public.ecr.aws/docker/library/php:7.4-apache
 
 # Install mysqli and upgrade (required lib by our code to do database operations)
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
