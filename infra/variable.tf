@@ -124,3 +124,44 @@ variable "project_name" {
   description = "Name of the project"
   type        = string
 }
+
+
+variable "db_username" {
+  description = "Database username"
+  type        = string
+}
+variable "db_password" {
+  description = "Database password"
+  type        = string
+}
+
+variable "db_database" {
+  description = "Database name"
+  type        = string
+}
+
+variable "identifier" {
+  description = "Identifier for the database instance"
+  type        = string
+
+}
+variable "storage" {
+  description = "Storage configuration for the database"
+  type        = string
+
+}
+variable "engine" {
+  description = "Database engine to use"
+  type        = string
+
+
+}
+variable "engine_version" {
+  description = "Version of the database engine"
+  type        = string
+}
+variable "instance_class" {
+  description = "Instance class for the database"
+  type        = string
+
+}

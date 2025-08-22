@@ -68,7 +68,7 @@ resource "aws_codepipeline" "ritual_roast_pipeline" {
         ClusterName = var.ecs_cluster_name
         ServiceName = var.service_name
         FileName    = "imagedefinitions.json"
-        
+
       }
     }
   }

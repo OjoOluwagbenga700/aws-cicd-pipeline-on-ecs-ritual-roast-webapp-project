@@ -115,8 +115,10 @@ resource "aws_iam_role_policy_attachment" "codebuild_policy_attachment" {
   policy_arn = aws_iam_policy.codebuild_policy.arn
 }
 
-
-
+resource "aws_iam_role_policy_attachment" "codebuild_ssm_readonly" {
+  role       = aws_iam_role.codebuild_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
+}
 
 # IAM role for CodePipeline
 resource "aws_iam_role" "codepipeline_role" {
@@ -216,5 +218,5 @@ resource "aws_iam_role_policy_attachment" "codepipeline_policy_attachment" {
 
 resource "aws_iam_role_policy_attachment" "ecs_policy_attachment" {
   role       = aws_iam_role.codepipeline_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 }

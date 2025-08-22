@@ -67,7 +67,7 @@ resource "aws_ecs_service" "ecs_service" {
   # Network configuration for the Fargate tasks
   network_configuration {
     subnets          = module.networking.private_subnets
-    security_groups  = [aws_security_group.ecs_task_sg.id]
+    security_groups  = [aws_security_group.private_app_tier_sg.id]
     assign_public_ip = true
   }
 
@@ -79,7 +79,7 @@ resource "aws_ecs_service" "ecs_service" {
   # Add ALB listener as dependency to ensure target group is ready
   depends_on = [
     aws_lb_target_group.alb_tg,
-    aws_security_group.ecs_task_sg,
+    aws_security_group.private_app_tier_sg,
     aws_ecs_task_definition.task_definition,
     aws_lb_listener.alb_http_listener
   ]

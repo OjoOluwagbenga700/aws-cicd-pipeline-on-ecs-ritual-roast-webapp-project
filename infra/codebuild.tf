@@ -63,7 +63,27 @@ resource "aws_codebuild_project" "rr_build" {
       name  = "LOG_GROUP_NAME"
       value = var.log_group_name
     }
+    environment_variable {
+      name  = "DB_USERNAME_PARAM"
+      value = aws_ssm_parameter.db_username.value
+    }
+
+    environment_variable {
+      name  = "DB_PASSWORD_PARAM"
+      value = aws_ssm_parameter.db_password.value
+    }
+
+    environment_variable {
+      name  = "DB_NAME_PARAM"
+      value = aws_ssm_parameter.db_database.value
+    }
+    environment_variable {
+      name  = "DB_HOST_PARAM"
+      value = aws_ssm_parameter.db_server.value
+    }
+
   }
+
 
   source {
     type      = "CODEPIPELINE"

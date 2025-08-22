@@ -18,4 +18,11 @@ private_subnets          = ["10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24", "10.0.6
 github_repo              = "OjoOluwagbenga700/aws-cicd-pipeline-on-ecs-ritual-roast-webapp-project"
 github_branch            = "main"
 codepipeline_bucket_name = "ritual-roast-cicd-artifacts"
-
+identifier               = "ritual-roast-db"
+storage                  = "20"
+engine                   = "mysql"
+engine_version           = "8.0.43"
+instance_class           = "db.t3.medium"
+db_database              = "rrdb"
+db_username              = "admin"
+db_password              = "password123"
