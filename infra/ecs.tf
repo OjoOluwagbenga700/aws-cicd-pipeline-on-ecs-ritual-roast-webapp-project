@@ -44,10 +44,6 @@ resource "aws_ecs_task_definition" "task_definition" {
     image          = docker_image.image.name
     log_group_name = var.log_group_name
     aws_region     = var.aws_region
-    db_host        = aws_db_instance.mysql.endpoint
-    db_name        = var.db_database
-    db_username    = var.db_username
-    db_password    = var.db_password
   })
 
 }

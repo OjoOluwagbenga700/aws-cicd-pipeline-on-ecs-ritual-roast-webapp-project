@@ -19,7 +19,61 @@ phases:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Creating task definition...
+      - |
+        cat > taskdefinition.json << EOF
+        {
+          "family": "$TASK_FAMILY",
+          "networkMode": "awsvpc",
+          "requiresCompatibilities": ["FARGATE"],
+          "cpu": "$TASK_CPU",
+          "memory": "$TASK_MEMORY",
+          "executionRoleArn": "$EXECUTION_ROLE_ARN",
+          "taskRoleArn": "$TASK_ROLE_ARN",
+          "containerDefinitions": [
+            {
+              "name": "$CONTAINER_NAME",
+              "image": "$REPOSITORY_URI:$IMAGE_TAG",
+              "portMappings": [
+                {
+                  "containerPort": 80,
+                  "protocol": "tcp"
+                }
+              ],
+              "essential": true,
+              "environment": [
+                {
+                  "name": "DB_HOST",
+                  "value": "$DB_HOST_PARAM"
+                },
+                {
+                  "name": "DB_NAME",
+                  "value": "$DB_NAME_PARAM"
+                },
+                {
+                  "name": "DB_USERNAME",
+                  "value": "$DB_USERNAME_PARAM"
+                },
+                {
+                  "name": "DB_PASSWORD",
+                  "value": "$DB_PASSWORD_PARAM"
+                }
+              ],
+              "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                  "awslogs-group": "$LOG_GROUP_NAME",
+                  "awslogs-region": "$AWS_DEFAULT_REGION",
+                  "awslogs-stream-prefix": "ritual-roast"
+                }
+              }
+            }
+          ]
+        }
+        EOF
       - echo Writing image definitions file...
       - printf '[{"name":"%s","imageUri":"%s"}]' "$CONTAINER_NAME" "$REPOSITORY_URI:$IMAGE_TAG" | tee imagedefinitions.json
 artifacts:
-  files: imagedefinitions.json
+  files: 
+    - imagedefinitions.json
+    - taskdefinition.json
