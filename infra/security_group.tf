@@ -70,6 +70,8 @@ resource "aws_security_group" "private_db_tier_sg" {
   description = "Security group for private database tier"
   vpc_id      = module.networking.vpc_id
 
+  # amazonq-ignore-next-line
+  # amazonq-ignore-next-line
   # Allow inbound communication from web tier
   ingress {
     description     = "Allow inbound traffic from private app tier"

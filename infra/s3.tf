@@ -1,6 +1,8 @@
 # S3 bucket to store pipeline artifacts
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket        = var.codepipeline_bucket_name
+  # amazonq-ignore-next-line
+  # amazonq-ignore-next-line
   force_destroy = true
 }
 

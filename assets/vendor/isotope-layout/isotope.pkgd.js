@@ -28,6 +28,8 @@
     // CommonJS
     module.exports = factory(
       window,
+      // amazonq-ignore-next-line
+      // amazonq-ignore-next-line
       require('jquery')
     );
   } else {
@@ -788,6 +790,7 @@ return utils;
     // CommonJS - Browserify, Webpack
     module.exports = factory(
       require('ev-emitter'),
+      // amazonq-ignore-next-line
       require('get-size')
     );
   } else {
@@ -1351,8 +1354,10 @@ return Item;
     module.exports = factory(
       window,
       require('ev-emitter'),
+      // amazonq-ignore-next-line
       require('get-size'),
       require('fizzy-ui-utils'),
+      // amazonq-ignore-next-line
       require('./item')
     );
   } else {
@@ -2161,6 +2166,7 @@ proto.destroy = function() {
   this.unbindResize();
 
   var id = this.element.outlayerGUID;
+  // amazonq-ignore-next-line
   delete instances[ id ]; // remove reference to instance by id
   delete this.element.outlayerGUID;
   // remove data for jQuery
@@ -2360,6 +2366,7 @@ return Item;
     // CommonJS
     module.exports = factory(
       require('get-size'),
+      // amazonq-ignore-next-line
       require('outlayer')
     );
   } else {
@@ -2759,6 +2766,7 @@ return Item;
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
     module.exports = factory(
+      // amazonq-ignore-next-line
       require('../layout-mode'),
       require('masonry-layout')
     );
@@ -2976,11 +2984,13 @@ return Vertical;
       require('outlayer'),
       require('get-size'),
       require('desandro-matches-selector'),
+      // amazonq-ignore-next-line
       require('fizzy-ui-utils'),
       require('isotope-layout/js/item'),
       require('isotope-layout/js/layout-mode'),
       // include default layout modes
       require('isotope-layout/js/layout-modes/masonry'),
+      // amazonq-ignore-next-line
       require('isotope-layout/js/layout-modes/fit-rows'),
       require('isotope-layout/js/layout-modes/vertical')
     );

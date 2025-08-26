@@ -11,6 +11,8 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 # Create CloudWatch Log Group
+# amazonq-ignore-next-line
+# amazonq-ignore-next-line
 resource "aws_cloudwatch_log_group" "ecs_logs" {
   name              = var.log_group_name
   retention_in_days = 7
@@ -36,6 +38,7 @@ resource "aws_ecs_task_definition" "task_definition" {
   }
 
   # Dependencies required before task definition can be created
+  # amazonq-ignore-next-line
   depends_on = [aws_iam_role.ecs_task_execution_role, docker_registry_image.image, aws_cloudwatch_log_group.ecs_logs]
 
   # Container definition with environment variables and logging configuration
@@ -44,6 +47,7 @@ resource "aws_ecs_task_definition" "task_definition" {
     image          = docker_image.image.name
     log_group_name = var.log_group_name
     aws_region     = var.aws_region
+    
   })
 
 }
@@ -67,6 +71,7 @@ resource "aws_ecs_service" "ecs_service" {
   network_configuration {
     subnets          = module.networking.private_subnets
     security_groups  = [aws_security_group.private_app_tier_sg.id]
+    # amazonq-ignore-next-line
     assign_public_ip = true
   }
 

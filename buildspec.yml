@@ -43,20 +43,24 @@ phases:
               "essential": true,
               "environment": [
                 {
-                  "name": "DB_HOST",
-                  "value": "$DB_HOST_PARAM"
+                  "name": "DB_HOST_PARAM",
+                  "valueFrom": "$DB_HOST_PARAM"
                 },
                 {
-                  "name": "DB_NAME",
-                  "value": "$DB_NAME_PARAM"
+                  "name": "DB_DATABASE_PARAM",
+                  "valueFrom": "$DB_DATABASE_PARAM"
                 },
                 {
-                  "name": "DB_USERNAME",
-                  "value": "$DB_USERNAME_PARAM"
+                  "name": "DB_USERNAME_PARAM",
+                  "valueFrom": "$DB_USERNAME_PARAM"
                 },
                 {
-                  "name": "DB_PASSWORD",
-                  "value": "$DB_PASSWORD_PARAM"
+                  "name": "DB_PASSWORD_PARAM",
+                  "valueFrom": "$DB_PASSWORD_PARAM"
+                },
+                {
+                  "name": "AWS_REGION",
+                  "value": "$AWS_DEFAULT_REGION"
                 }
               ],
               "logConfiguration": {

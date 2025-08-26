@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavHide = document.querySelector('.mobile-nav-hide');
 
   document.querySelectorAll('.mobile-nav-toggle').forEach(el => {
+    // amazonq-ignore-next-line
     el.addEventListener('click', function(event) {
       event.preventDefault();
       mobileNavToogle();

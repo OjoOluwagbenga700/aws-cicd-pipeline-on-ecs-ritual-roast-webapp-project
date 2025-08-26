@@ -1,5 +1,6 @@
 
 # CodeBuild project
+
 resource "aws_codebuild_project" "rr_build" {
   name          = "ritual-roast-build"
   description   = "Build project for ritual roast website"
@@ -13,6 +14,7 @@ resource "aws_codebuild_project" "rr_build" {
   environment {
     type            = "LINUX_CONTAINER"
     compute_type    = "BUILD_GENERAL1_SMALL"
+
     image           = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
     privileged_mode = true
 
@@ -65,21 +67,21 @@ resource "aws_codebuild_project" "rr_build" {
     }
     environment_variable {
       name  = "DB_USERNAME_PARAM"
-      value = aws_ssm_parameter.db_username.value
+      value = aws_ssm_parameter.db_username.name
     }
 
     environment_variable {
       name  = "DB_PASSWORD_PARAM"
-      value = aws_ssm_parameter.db_password.value
+      value = aws_ssm_parameter.db_password.name
     }
 
     environment_variable {
-      name  = "DB_NAME_PARAM"
-      value = aws_ssm_parameter.db_database.value
+      name  = "DB_DATABASE_PARAM"
+      value = aws_ssm_parameter.db_database.name
     }
     environment_variable {
       name  = "DB_HOST_PARAM"
-      value = aws_ssm_parameter.db_server.value
+      value = aws_ssm_parameter.db_server.name
     }
 
   }

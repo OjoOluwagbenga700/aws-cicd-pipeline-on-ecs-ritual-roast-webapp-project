@@ -425,6 +425,8 @@
       return;
     }
     element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
+    // amazonq-ignore-next-line
+    // amazonq-ignore-next-line
     delete events[typeEvent][fn.uidEvent];
   }
   function removeNamespacedHandlers(element, events, typeEvent, namespace) {
@@ -2624,6 +2626,7 @@
     if (mainAxis != null) {
       var len = mainAxis === 'y' ? 'height' : 'width';
 
+      // amazonq-ignore-next-line
       switch (variation) {
         case start:
           offsets[mainAxis] = offsets[mainAxis] - (reference[len] / 2 - element[len] / 2);

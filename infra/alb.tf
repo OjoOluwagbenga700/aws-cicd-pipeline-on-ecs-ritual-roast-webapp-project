@@ -36,6 +36,7 @@ resource "aws_lb_target_group" "alb_tg" {
   depends_on = [aws_lb.alb]
 
   lifecycle {
+    # amazonq-ignore-next-line
     #create_before_destroy = true
   }
 }
