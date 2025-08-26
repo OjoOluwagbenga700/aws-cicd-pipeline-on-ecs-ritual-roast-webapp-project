@@ -39,38 +39,37 @@ try {
     ])['Parameter']['Value'];
 } catch (AwsException $e) {
     echo json_encode(['message' => 'Error fetching parameters', 'status' => 'error', 'aws_error' => $e->getMessage()]);
-    // amazonq-ignore-next-line
-    // amazonq-ignore-next-line
-    die();
+    exit();
 }
 
 $connection = new mysqli($host, $username, $password, $database);
 
 if ($connection->connect_error) {
-    echo "error in connection";
-} else {
-    $table = mysqli_real_escape_string($connection, "beverage_voting");
+    echo json_encode(['message' => 'Database connection failed', 'status' => 'error', 'error' => $connection->connect_error]);
+    exit();
+}
 
-    // amazonq-ignore-next-line
-    $checktable = mysqli_query($connection, "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = '$table' AND TABLE_SCHEMA = '$database'");
+$table_name = "beverage_voting";
 
-    if (mysqli_num_rows($checktable) > 0) {
-        // Table exists
-    } else {
-        $query = "CREATE TABLE `beverage_voting` (
-            `beverage_voting_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            `name` varchar(50) NOT NULL,
-            `email` varchar(50) NOT NULL,
-            `beverage` varchar(50) NOT NULL,
-            `created_on` datetime NOT NULL DEFAULT current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci";
+$stmt = $connection->prepare("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?");
+$stmt->bind_param("ss", $table_name, $database);
+$stmt->execute();
+$result = $stmt->get_result();
 
-        if ($connection->query($query) === TRUE) {
-            // Table created
-        } else {
-            echo json_encode(['message' => 'Error on submit data', 'status' => 'error', 'sql_error' => mysqli_error($connection)]);
-            die();
-        }
+if ($result->num_rows == 0) {
+    $create_query = "CREATE TABLE `beverage_voting` (
+        `beverage_voting_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        `name` varchar(50) NOT NULL,
+        `email` varchar(50) NOT NULL,
+        `beverage` varchar(50) NOT NULL,
+        `created_on` datetime NOT NULL DEFAULT current_timestamp()
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci";
+
+    if (!$connection->query($create_query)) {
+        echo json_encode(['message' => 'Error creating table', 'status' => 'error', 'sql_error' => $connection->error]);
+        exit();
     }
 }
+
+$stmt->close();
 ?>
